@@ -125,37 +125,6 @@ weathernow/
    - [ ] Check the History page to ensure the search was logged.
    - [ ] Toggle dark mode and ensure styles apply correctly.
 
-## 🌍 Deployment Guide
-
-### Option 1: Render
-1. Create an account on Render.
-2. Click **New +** and select **Web Service**.
-3. Connect your GitHub repository.
-4. Set the Build Command: `pip install -r requirements.txt`
-5. Set the Start Command: `gunicorn app:app`
-6. Add your Environment Variables (`OPENWEATHER_API_KEY`, `SECRET_KEY`).
-7. Click **Create Web Service**.
-
-### Option 2: Railway
-1. Create a Railway account and link GitHub.
-2. Click **New Project** -> **Deploy from GitHub repo**.
-3. Select this repository.
-4. Go to the Variables tab and add `OPENWEATHER_API_KEY` and `SECRET_KEY`.
-5. Railway will automatically detect the Python app and deploy it.
-
-### Option 3: PythonAnywhere
-1. Create a PythonAnywhere account.
-2. Open a bash console and clone the repo.
-3. Create a virtual environment and install requirements.
-4. Go to the **Web** tab, add a new web app, and point it to the cloned folder.
-5. Update the WSGI configuration file to import your app.
-
-## 🔮 Future Enhancements
-- Geolocation Support: Auto-detect user's location on page load.
-- Temperature Conversion: Toggle between Celsius and Fahrenheit.
-- Weather Maps: Integrate interactive radar and precipitation maps.
-- User Authentication: Allow multiple users to have their own private favorites and history.
-
 ## 👨‍💻 Author Information
 **Developed for Synent Technologies Internship Task 6**
 - **Developer:** Krushil Lukhi 
