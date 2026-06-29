@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}About - WeatherNow{% endblock %}
+{% block content %}
+<div class="container my-5 fade-in">
+    <div class="border-bottom pb-3 mb-5">
+        <h3 class="fw-bold mb-2">About WeatherNow</h3>
+        <p class="text-muted mb-0">WeatherNow is a real-time weather forecasting application that provides accurate and up-to-date weather information for any location around the world.</p>
+    </div>
+    
+    <div class="row g-4 mb-4">
+        <!-- Technology Stack -->
+        <div class="col-md-6">
+            <div class="ui-card h-100">
+                <h6 class="fw-bold text-primary-custom mb-3">Technology Stack</h6>
+                <ul class="list-unstyled text-muted small mb-0">
+                    <li class="mb-2 d-flex align-items-center"><i class="fa-solid fa-circle text-primary-custom me-2" style="font-size: 0.4em;"></i>Python (Flask)</li>
+                    <li class="mb-2 d-flex align-items-center"><i class="fa-solid fa-circle text-primary-custom me-2" style="font-size: 0.4em;"></i>OpenWeatherMap API</li>
+                    <li class="mb-2 d-flex align-items-center"><i class="fa-solid fa-circle text-primary-custom me-2" style="font-size: 0.4em;"></i>SQLite Database</li>
+                    <li class="mb-2 d-flex align-items-center"><i class="fa-solid fa-circle text-primary-custom me-2" style="font-size: 0.4em;"></i>HTML5, CSS3, JavaScript</li>
+                    <li class="mb-2 d-flex align-items-center"><i class="fa-solid fa-circle text-primary-custom me-2" style="font-size: 0.4em;"></i>Bootstrap 5</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Features -->
+        <div class="col-md-6">
+            <div class="ui-card h-100">
+                <h6 class="fw-bold text-primary-custom mb-3">Features</h6>
+                <ul class="list-unstyled text-muted small mb-0">
+                    <li class="mb-2 d-flex align-items-center"><i class="fa-solid fa-check text-success me-2"></i>Real-time Weather Information</li>
+                    <li class="mb-2 d-flex align-items-center"><i class="fa-solid fa-check text-success me-2"></i>5 Day Weather Forecast</li>
+                    <li class="mb-2 d-flex align-items-center"><i class="fa-solid fa-check text-success me-2"></i>Search History</li>
+                    <li class="mb-2 d-flex align-items-center"><i class="fa-solid fa-check text-success me-2"></i>Favorite Cities</li>
+                    <li class="mb-2 d-flex align-items-center"><i class="fa-solid fa-check text-success me-2"></i>Dark Mode</li>
+                    <li class="mb-2 d-flex align-items-center"><i class="fa-solid fa-check text-success me-2"></i>Responsive Design</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row g-4">
+        <!-- API Information -->
+        <div class="col-md-6">
+            <div class="ui-card h-100">
+                <h6 class="fw-bold text-primary-custom mb-3">API Information</h6>
+                <p class="small text-muted mb-3">We use OpenWeatherMap API for real-time weather data.</p>
+                <div class="small text-muted">
+                    <p class="mb-1"><strong>API Provider:</strong> <a href="#" class="text-decoration-none text-primary-custom">OpenWeatherMap</a></p>
+                    <p class="mb-0"><strong>Website:</strong> <a href="#" class="text-decoration-none text-primary-custom">https://openweathermap.org</a></p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Developer -->
+        <div class="col-md-6">
+            <div class="ui-card h-100 d-flex align-items-center">
+                <div class="bg-secondary bg-opacity-25 rounded-circle overflow-hidden me-4 d-flex justify-content-center align-items-center" style="width: 60px; height: 60px;">
+                    <i class="fa-solid fa-user text-secondary fs-3"></i>
+                </div>
+                <div class="flex-grow-1">
+                    <h6 class="fw-bold text-primary-custom mb-1">Krushil Lukhi</h6>
+                    <p class="small text-muted mb-2">Python Developer</p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-muted"><i class="fa-brands fa-github"></i></a>
+                        <a href="#" class="text-muted"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="#" class="text-muted"><i class="fa-brands fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
