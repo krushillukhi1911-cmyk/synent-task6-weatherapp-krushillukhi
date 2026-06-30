@@ -1,0 +1,114 @@
+<div class="ui-card h-100">
+    <h5 class="fw-bold mb-1">5 Day Forecast</h5>
+    <p class="small text-muted border-bottom pb-3 mb-0">Weather Forecast for {{ weather.name }}, {{ weather.sys.country }}</p>
+    
+    {% if forecast %}
+        <div class="list-group list-group-flush">
+        {% for day in forecast %}
+            <div class="list-group-item bg-transparent px-0 py-3 border-bottom">
+                <div class="d-flex justify-content-between align-items-center">
+                    <!-- Date -->
+                    <div style="width: 80px;">
+                        <h6 class="mb-0 fw-bold">{{ day.dt_txt.split(' ')[0] | dateformat('%d %b') }}</h6>
+                        <small class="text-muted">{{ day.dt_txt.split(' ')[0] | dateformat('%a') }}</small>
+                    </div>
+                    
+                    <!-- Icon & Temp -->
+                    <div class="d-flex align-items-center flex-grow-1 justify-content-center">
+                        <img src="http://openweathermap.org/img/wn/{{ day.weather[0].icon }}.png" alt="{{ day.weather[0].description }}" style="width: 45px;">
+                        <div class="ms-2 text-center">
+                            <h5 class="mb-0 fw-bold">{{ day.main.temp | round | int }}&deg;C</h5>
+                            <small class="text-muted text-capitalize" style="font-size: 0.7rem;">{{ day.weather[0].description }}</small>
+                        </div>
+                    </div>
+                    
+                    <!-- Extra stats -->
+                    <div class="text-end" style="width: 70px;">
+                        <div class="small text-muted mb-1" style="font-size: 0.75rem;"><i class="fa-solid fa-droplet me-1"></i>{{ day.main.humidity }}%</div>
+                        <div class="small text-muted" style="font-size: 0.75rem;"><i class="fa-solid fa-wind me-1"></i>{{ day.wind.speed | round }} m/s</div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info mt-3">
+            Forecast data is currently unavailable.
+        </div>
+    {% endif %}
+    
+    <div class="mt-4 pt-3 border-top">
+        <h6 class="fw-bold mb-3">Forecast Chart</h6>
+        <!-- Working Chart.js graph -->
+        <div class="bg-white rounded p-3 border shadow-sm">
+            <canvas id="forecastChart" style="min-height: 200px; width: 100%;"></canvas>
+        </div>
+    </div>
+</div>
+
+<!-- Chart.js Integration -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const ctx = document.getElementById('forecastChart');
+    if (ctx) {
+        // Extract data passed from Flask template
+        const labels = [{% for day in forecast %}'{{ day.dt_txt.split(" ")[0] | dateformat("%a") }}'{% if not loop.last %}, {% endif %}{% endfor %}];
+        const tempData = [{% for day in forecast %}{{ day.main.temp | round | int }}{% if not loop.last %}, {% endif %}{% endfor %}];
+        
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Temperature (°C)',
+                    data: tempData,
+                    borderColor: '#0d6efd',
+                    backgroundColor: 'rgba(13, 110, 253, 0.1)',
+                    borderWidth: 2,
+                    pointBackgroundColor: '#ffffff',
+                    pointBorderColor: '#0d6efd',
+                    pointBorderWidth: 2,
+                    pointRadius: 5,
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        displayColors: false,
+                        callbacks: {
+                            label: function(context) {
+                                return context.parsed.y + ' °C';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        grid: {
+                            color: 'rgba(0,0,0,0.05)',
+                            drawBorder: false
+                        },
+                        ticks: {
+                            stepSize: 5
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false,
+                            drawBorder: false
+                        }
+                    }
+                }
+            }
+        });
+    }
+});
+</script>

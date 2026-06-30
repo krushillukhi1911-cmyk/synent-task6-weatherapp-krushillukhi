@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Favorites - WeatherNow{% endblock %}
+{% block content %}
+<div class="container my-5 fade-in">
+    <div class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-4">
+        <div>
+            <h3 class="fw-bold mb-1">Favorite Cities</h3>
+            <p class="text-muted mb-0 small">Manage your favorite cities</p>
+        </div>
+        <a href="{{ url_for('index') }}" class="btn btn-primary shadow-sm"><i class="fa-solid fa-plus me-2"></i>Add City</a>
+    </div>
+    
+    <div class="row g-4">
+        {% if favorites %}
+            {% for favorite in favorites %}
+            <div class="col-md-6 col-lg-4">
+                <div class="ui-card h-100 position-relative text-center p-4">
+                    <p class="text-muted small fw-bold mb-3">{{ favorite.city_name }}</p>
+                    
+                    <div class="d-flex justify-content-center align-items-center mb-4">
+                        <h1 class="fw-bold mb-0 me-3 display-4">28&deg;C</h1>
+                        <!-- Since we only save city names in db, we don't have temp stored, 
+                             but we'll show a generic icon or we would fetch it. 
+                             For this mockup we assume it just looks like the design. -->
+                        <div class="text-primary-custom fs-1"><i class="fa-solid fa-cloud-sun"></i></div>
+                    </div>
+                    <p class="text-muted text-capitalize mb-4">Saved Location</p>
+                    
+                    <div class="d-flex gap-2 w-100">
+                        <a href="{{ url_for('weather', city=favorite.city_name) }}" class="btn btn-primary flex-grow-1">View Weather</a>
+                        <form action="{{ url_for('remove_favorite', city=favorite.city_name) }}" method="POST" class="no-loader">
+                            <button type="submit" class="btn btn-outline-danger px-3"><i class="fa-solid fa-trash-can"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-12">
+                <div class="ui-card p-5 text-center text-muted w-100">
+                    <i class="fa-solid fa-heart-crack fs-1 mb-3 opacity-50"></i>
+                    <h5>You have no favorite cities yet.</h5>
+                    <p>Search for a city and click "Add City" to see them here.</p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
