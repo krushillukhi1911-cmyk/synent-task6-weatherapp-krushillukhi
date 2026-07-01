@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Search History - WeatherNow{% endblock %}
+{% block content %}
+<div class="container my-5 fade-in">
+    <div class="border-bottom pb-3 mb-4">
+        <h3 class="fw-bold mb-1">Search History</h3>
+        <p class="text-muted mb-0 small">Your recently searched cities</p>
+    </div>
+    
+    <div class="ui-card p-0 overflow-hidden mb-4">
+        {% if searches %}
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="bg-light text-muted small">
+                    <tr>
+                        <th class="py-3 px-4 fw-medium border-bottom-0">City Name</th>
+                        <th class="py-3 fw-medium border-bottom-0">Date & Time</th>
+                        <th class="py-3 px-4 fw-medium border-bottom-0 text-end">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="border-top-0">
+                    {% for search in searches %}
+                    <tr>
+                        <td class="py-3 px-4 fw-medium">{{ search.city_name }}</td>
+                        <td class="py-3 text-muted small">{{ search.searched_at.strftime('%d %B %Y, %I:%M %p') }}</td>
+                        <td class="py-3 px-4 text-end">
+                            <a href="{{ url_for('weather', city=search.city_name) }}" class="btn btn-sm btn-outline-primary px-3 rounded-pill">
+                                View <i class="fa-solid fa-arrow-right ms-1" style="font-size: 0.7em;"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="text-center py-5 text-muted">
+            <p class="mb-0">No recent searches found.</p>
+        </div>
+        {% endif %}
+    </div>
+    
+    {% if searches %}
+    <form action="{{ url_for('clear_history') }}" method="POST" class="no-loader">
+        <button type="submit" class="btn btn-link text-danger text-decoration-none p-0 fw-medium">
+            Clear All History
+        </button>
+    </form>
+    {% endif %}
+</div>
+{% endblock %}
