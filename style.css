@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary-blue: #0d6efd; /* Vibrant blue */
+    --light-blue: #e7f1ff;
+    --dark-blue: #0a2558; /* Footer color */
+    --bg-light: #f8f9fa; /* Page background */
+    --card-bg: #ffffff;
+    --text-main: #212529;
+    --text-muted: #6c757d;
+    --border-color: #e9ecef;
+    --shadow-sm: 0 .125rem .25rem rgba(0,0,0,.075);
+    --shadow-md: 0 .5rem 1rem rgba(0,0,0,.15);
+    --border-radius: 12px;
+}
+
+[data-theme="dark"] {
+    --primary-blue: #3d8bfd;
+    --light-blue: #031633;
+    --dark-blue: #051024;
+    --bg-light: #121212;
+    --card-bg: #1e1e1e;
+    --text-main: #f8f9fa;
+    --text-muted: #adb5bd;
+    --border-color: #2b2b2b;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-main);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Navbar */
+.navbar {
+    background-color: var(--card-bg) !important;
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 0;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    color: var(--primary-blue) !important;
+}
+
+.nav-link {
+    color: var(--text-main) !important;
+    font-weight: 500;
+    margin: 0 0.5rem;
+    position: relative;
+}
+
+.nav-link.active {
+    color: var(--primary-blue) !important;
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary-blue);
+    border-radius: 2px;
+}
+
+/* Cards */
+.ui-card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    padding: 1.5rem;
+    transition: box-shadow 0.2s ease;
+}
+
+.ui-card:hover {
+    box-shadow: var(--shadow-md);
+}
+
+/* Primary Weather Card (Blue Gradient) */
+.primary-weather-card {
+    background: linear-gradient(135deg, #0d6efd, #0a58ca);
+    color: white;
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--primary-blue);
+    border-color: var(--primary-blue);
+    border-radius: 8px;
+    font-weight: 500;
+    padding: 0.5rem 1.5rem;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+}
+
+/* Input Fields */
+.form-control.search-input {
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-color);
+    background-color: var(--card-bg);
+    color: var(--text-main);
+}
+
+.form-control.search-input:focus {
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    border-color: var(--primary-blue);
+    background-color: var(--card-bg);
+    color: var(--text-main);
+}
+
+/* Footer */
+footer {
+    background-color: var(--dark-blue);
+    color: white;
+    padding: 3rem 0 1.5rem;
+    margin-top: auto;
+}
+
+footer a {
+    color: #a0b3d6;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+footer a:hover {
+    color: white;
+}
+
+/* Utilities */
+.text-primary-custom {
+    color: var(--primary-blue) !important;
+}
+
+.bg-light-blue {
+    background-color: var(--light-blue);
+}
+
+/* Animations */
+.fade-in {
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Hero Section (Home) */
+.hero-section {
+    background: linear-gradient(135deg, #0d6efd 0%, #3d8bfd 100%);
+    color: white;
+    padding: 6rem 0;
+    border-radius: 0 0 2rem 2rem;
+    margin-top: -1px; /* overlap navbar border */
+    position: relative;
+    overflow: hidden;
+}
+
+/* Loading Overlay */
+#loading-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s;
+}
+
+[data-theme="dark"] #loading-overlay {
+    background: rgba(18, 18, 18, 0.8);
+}
+
+#loading-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Table overrides for Dark mode */
+[data-theme="dark"] .table {
+    color: var(--text-main);
+}
+[data-theme="dark"] .table-hover tbody tr:hover {
+    color: var(--text-main);
+    background-color: rgba(255, 255, 255, 0.05);
+}
