@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+{% block title %}{{ weather.name }} - WeatherNow{% endblock %}
+{% block content %}
+<div class="container my-5 fade-in">
+    <!-- Top Search Bar & Header -->
+    <div class="row mb-4 align-items-center">
+        <div class="col-md-8 mb-3 mb-md-0">
+            <form action="{{ url_for('search') }}" method="POST" class="d-flex">
+                <input type="text" name="city" class="form-control search-input me-2" placeholder="Search for city..." value="{{ weather.name }}" required>
+                <button class="btn btn-primary px-4" type="submit">Search</button>
+            </form>
+        </div>
+        <div class="col-md-4 text-md-end">
+            {% if is_favorite %}
+            <form action="{{ url_for('remove_favorite', city=weather.name) }}" method="POST" class="d-inline no-loader">
+                <button type="submit" class="btn btn-outline-danger">
+                    <i class="fa-solid fa-heart-crack me-2"></i>Remove
+                </button>
+            </form>
+            {% else %}
+            <form action="{{ url_for('add_favorite', city=weather.name) }}" method="POST" class="d-inline no-loader">
+                <button type="submit" class="btn btn-primary bg-primary-custom">
+                    <i class="fa-regular fa-heart me-2"></i>Add City
+                </button>
+            </form>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- Main Left Column -->
+        <div class="col-lg-8">
+            <!-- Primary Weather Card -->
+            <div class="primary-weather-card mb-4 shadow-md">
+                <div class="row align-items-center">
+                    <div class="col-sm-7 position-relative z-1">
+                        <h4 class="mb-1 fw-bold">{{ weather.name }}, {{ weather.sys.country }}</h4>
+                        <p class="small opacity-75 mb-4">{{ (weather.dt) | datetimeformat('%A, %d %B %Y | %I:%M %p') }}</p>
+                        
+                        <h1 class="display-1 fw-bold mb-0" style="font-size: 5rem;">{{ weather.main.temp | round | int }}&deg;C</h1>
+                        <h4 class="text-capitalize mb-4">{{ weather.weather[0].description }}</h4>
+                        
+                        <p class="mb-0 small opacity-75">Feels like {{ weather.main.feels_like | round | int }}&deg;C</p>
+                    </div>
+                    <div class="col-sm-5 text-end position-relative z-1">
+                        <img src="http://openweathermap.org/img/wn/{{ weather.weather[0].icon }}@4x.png" alt="weather" style="width: 200px; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));">
+                    </div>
+                </div>
+                <!-- Background decorative shapes -->
+                <div class="position-absolute top-0 end-0 opacity-25 w-100 h-100" style="background: radial-gradient(circle at top right, rgba(255,255,255,0.4) 0%, transparent 60%); z-index: 0;"></div>
+            </div>
+
+            <!-- Weather Overview -->
+            <h5 class="fw-bold mb-3">Weather Overview</h5>
+            <div class="row g-3 mb-4">
+                <div class="col-sm-6">
+                    <div class="ui-card d-flex align-items-center">
+                        <div class="text-primary-custom fs-4 me-3"><i class="fa-solid fa-droplet"></i></div>
+                        <div>
+                            <p class="text-muted small mb-0">Humidity</p>
+                            <h5 class="fw-bold mb-0">{{ weather.main.humidity }}%</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="ui-card d-flex align-items-center">
+                        <div class="text-primary-custom fs-4 me-3"><i class="fa-solid fa-gauge-high"></i></div>
+                        <div>
+                            <p class="text-muted small mb-0">Pressure</p>
+                            <h5 class="fw-bold mb-0">{{ weather.main.pressure }} hPa</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="ui-card d-flex align-items-center">
+                        <div class="text-primary-custom fs-4 me-3"><i class="fa-solid fa-wind"></i></div>
+                        <div>
+                            <p class="text-muted small mb-0">Wind Speed</p>
+                            <h5 class="fw-bold mb-0">{{ weather.wind.speed }} m/s</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="ui-card d-flex align-items-center">
+                        <div class="text-primary-custom fs-4 me-3"><i class="fa-solid fa-eye"></i></div>
+                        <div>
+                            <p class="text-muted small mb-0">Visibility</p>
+                            <h5 class="fw-bold mb-0">{{ (weather.visibility / 1000) | round(1) }} km</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sunrise/Sunset & Additional Info -->
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="ui-card h-100">
+                        <h6 class="fw-bold mb-4">Sunrise & Sunset</h6>
+                        <div class="d-flex justify-content-between text-center mt-4 pt-3 position-relative">
+                            <!-- Simple arc visualization with border -->
+                            <div class="position-absolute w-100" style="top: 0; left: 0; height: 50px; border: 2px dashed var(--border-color); border-bottom: none; border-radius: 50px 50px 0 0;"></div>
+                            
+                            <div class="position-relative z-1" style="margin-top: -20px;">
+                                <div class="bg-white rounded-circle p-1 d-inline-block text-warning border"><i class="fa-solid fa-sun"></i></div>
+                                <p class="small text-muted mb-0 mt-2">Sunrise</p>
+                                <h6 class="fw-bold">{{ (weather.sys.sunrise) | datetimeformat('%I:%M %p') }}</h6>
+                            </div>
+                            <div class="position-relative z-1" style="margin-top: -20px;">
+                                <div class="bg-white rounded-circle p-1 d-inline-block text-danger border"><i class="fa-solid fa-moon"></i></div>
+                                <p class="small text-muted mb-0 mt-2">Sunset</p>
+                                <h6 class="fw-bold">{{ (weather.sys.sunset) | datetimeformat('%I:%M %p') }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="ui-card h-100">
+                        <h6 class="fw-bold mb-3">Additional Info</h6>
+                        <ul class="list-group list-group-flush small">
+                            <li class="list-group-item d-flex justify-content-between align-items-center px-0 bg-transparent border-0 pb-2">
+                                <span class="text-muted"><i class="fa-solid fa-temperature-empty me-2 text-primary-custom"></i>Dew Point</span>
+                                <span class="fw-bold">N/A</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center px-0 bg-transparent border-0 py-2">
+                                <span class="text-muted"><i class="fa-solid fa-temperature-half me-2 text-primary-custom"></i>Feels Like</span>
+                                <span class="fw-bold">{{ weather.main.feels_like | round | int }}&deg;C</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center px-0 bg-transparent border-0 pt-2">
+                                <span class="text-muted"><i class="fa-solid fa-cloud me-2 text-primary-custom"></i>Cloud Cover</span>
+                                <span class="fw-bold">{{ weather.clouds.all }}%</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Right Column: Forecast -->
+        <div class="col-lg-4">
+            {% include "forecast.html" %}
+        </div>
+    </div>
+</div>
+{% endblock %}

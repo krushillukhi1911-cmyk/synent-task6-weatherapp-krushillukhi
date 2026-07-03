@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block title %}Home - WeatherNow{% endblock %}
+{% block content %}
+<!-- Hero Section -->
+<div class="hero-section mb-5">
+    <div class="container h-100 position-relative z-1">
+        <div class="row align-items-center h-100 fade-in">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <h1 class="display-4 fw-bold mb-3">Real-Time<br>Weather Forecast</h1>
+                <p class="lead mb-4 opacity-75">Get accurate weather information<br>anywhere in the world</p>
+                
+                <form action="{{ url_for('search') }}" method="POST" class="bg-white p-2 rounded-3 d-flex shadow-sm">
+                    <input type="text" name="city" class="form-control border-0 shadow-none" placeholder="Search for city..." required>
+                    <button class="btn btn-primary px-4 rounded-3" type="submit">Search</button>
+                </form>
+            </div>
+            <div class="col-lg-6 text-center position-relative">
+                <img src="https://openweathermap.org/img/wn/02d@4x.png" alt="Weather Graphic" style="width: 300px; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Explore Features Section -->
+<div class="container mb-5 pb-4 fade-in" style="animation-delay: 0.1s;">
+    <div class="text-center mb-5">
+        <h3 class="fw-bold">Explore Features</h3>
+        <p class="text-muted">Everything you need to know about the weather</p>
+    </div>
+    
+    <div class="row g-4">
+        <!-- Feature 1 -->
+        <div class="col-md-6 col-lg-4">
+            <div class="ui-card h-100 d-flex align-items-start">
+                <div class="bg-light-blue p-3 rounded-circle text-primary-custom me-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                    <i class="fa-solid fa-cloud-sun fs-5"></i>
+                </div>
+                <div>
+                    <h6 class="fw-bold mb-1">Current Weather</h6>
+                    <p class="text-muted small mb-0">Get real-time weather information</p>
+                </div>
+            </div>
+        </div>
+        <!-- Feature 2 -->
+        <div class="col-md-6 col-lg-4">
+            <div class="ui-card h-100 d-flex align-items-start">
+                <div class="bg-light-blue p-3 rounded-circle text-primary-custom me-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                    <i class="fa-regular fa-calendar-days fs-5"></i>
+                </div>
+                <div>
+                    <h6 class="fw-bold mb-1">5 Day Forecast</h6>
+                    <p class="text-muted small mb-0">Plan ahead with accurate 5 day forecasts</p>
+                </div>
+            </div>
+        </div>
+        <!-- Feature 3 -->
+        <div class="col-md-6 col-lg-4">
+            <div class="ui-card h-100 d-flex align-items-start">
+                <div class="bg-light-blue p-3 rounded-circle text-primary-custom me-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                    <i class="fa-solid fa-droplet fs-5"></i>
+                </div>
+                <div>
+                    <h6 class="fw-bold mb-1">Humidity</h6>
+                    <p class="text-muted small mb-0">Track humidity levels in your city</p>
+                </div>
+            </div>
+        </div>
+        <!-- Feature 4 -->
+        <div class="col-md-6 col-lg-4">
+            <div class="ui-card h-100 d-flex align-items-start">
+                <div class="bg-light-blue p-3 rounded-circle text-primary-custom me-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                    <i class="fa-solid fa-wind fs-5"></i>
+                </div>
+                <div>
+                    <h6 class="fw-bold mb-1">Wind Speed</h6>
+                    <p class="text-muted small mb-0">Know the wind speed and direction</p>
+                </div>
+            </div>
+        </div>
+        <!-- Feature 5 -->
+        <div class="col-md-6 col-lg-4">
+            <div class="ui-card h-100 d-flex align-items-start">
+                <div class="bg-light-blue p-3 rounded-circle text-primary-custom me-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                    <i class="fa-solid fa-gauge-high fs-5"></i>
+                </div>
+                <div>
+                    <h6 class="fw-bold mb-1">Pressure</h6>
+                    <p class="text-muted small mb-0">Atmospheric pressure at your location</p>
+                </div>
+            </div>
+        </div>
+        <!-- Feature 6 -->
+        <div class="col-md-6 col-lg-4">
+            <div class="ui-card h-100 d-flex align-items-start">
+                <div class="bg-light-blue p-3 rounded-circle text-primary-custom me-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                    <i class="fa-solid fa-sun fs-5"></i>
+                </div>
+                <div>
+                    <h6 class="fw-bold mb-1">Sunrise & Sunset</h6>
+                    <p class="text-muted small mb-0">Get sunrise and sunset timings</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
