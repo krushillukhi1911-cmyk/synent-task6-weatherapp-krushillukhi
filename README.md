@@ -1,135 +1,237 @@
-# WeatherNow - Real-Time Weather Forecast Application
+# 🌦️ WeatherNow - Real-Time Weather Forecast Application
 
-![WeatherNow Hero](https://via.placeholder.com/1200x600?text=WeatherNow+Premium+Weather+App)
+WeatherNow is a modern, responsive **Full-Stack Weather Forecasting Web Application** built with **Python and Flask**, powered by the **OpenWeatherMap API**. 
 
-## 📌 Project Overview
-WeatherNow is a professional, full-stack weather application built with Python Flask and the OpenWeatherMap API. It allows users to search for any city worldwide and get real-time weather data, a 5-day forecast, and interactive features like favorite cities and search history. 
-
-Designed with modern UI/UX principles, WeatherNow features a stunning Glassmorphism design, dark mode support, and full responsiveness across all devices.
-
-**Repository Name:** `synent-task6-weatherapp-krushillukhi`
-
-## ✨ Features
-- **Real-Time Weather Data:** Current temperature, feels like, humidity, wind speed, pressure, visibility, and cloud percentage.
-- **5-Day Forecast:** Detailed 5-day outlook with daily high/low temperatures and weather conditions.
-- **Interactive Search:** Quickly search for any city worldwide.
-- **Search History:** Automatically saves your last 10 searches for quick access, with the ability to clear history.
-- **Favorite Cities:** Add and remove cities to your favorites list for one-click access.
-- **Premium UI/UX:** 
-  - Glassmorphism design elements
-  - Smooth micro-animations and transitions
-  - Fully responsive on mobile, tablet, and desktop
-  - Dark mode support
-- **Robust Error Handling:** Professional 404 and 500 error pages, along with graceful API error handling.
-
-## 📸 Screenshots (Descriptions)
-1. **Home Page:** A sleek landing page featuring a large search bar, a dynamic weather illustration, and the main features of the application.
-2. **Weather Search Page (Dashboard):** Displays the current weather details (temperature, humidity, wind, etc.) in a large glassmorphic card, with the 5-day forecast cards below it.
-3. **Forecast Page:** Detailed cards showing the 5-day forecast with daily icons and temperatures.
-4. **Favorites Page:** A grid of saved cities with options to quickly view their weather or remove them.
-5. **History Page:** A clean table listing recent searches with timestamps and "Search Again" buttons.
-6. **About Page:** Project overview, technology stack details, and developer information.
-
-## 🛠️ Technology Stack
-- **Backend:** Python 3.11+, Flask, Flask-SQLAlchemy, Requests, python-dotenv
-- **Frontend:** HTML5, CSS3, Bootstrap 5, JavaScript (Vanilla)
-- **Database:** SQLite
-- **API:** OpenWeatherMap API
-- **Design System:** Custom CSS with Glassmorphism and CSS Variables
-
-## 🚀 Installation Guide
-
-### Prerequisites
-- Python 3.11 or higher
-- Git
-
-### Step-by-Step Installation
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/synent-task6-weatherapp-krushillukhi.git
-   cd synent-task6-weatherapp-krushillukhi
-   ```
-
-2. **Create a Virtual Environment**
-   ```bash
-   python -m venv venv
-   # On Windows:
-   venv\Scripts\activate
-   # On macOS/Linux:
-   source venv/bin/activate
-   ```
-
-3. **Install Dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-## ⚙️ Configuration Guide & API Setup
-1. **Get an OpenWeatherMap API Key**
-   - Go to [OpenWeatherMap](https://openweathermap.org/api) and sign up for a free account.
-   - Navigate to your profile and generate an API key.
-
-2. **Environment Variables**
-   - Copy the example environment file:
-     ```bash
-     cp .env.example .env
-     ```
-   - Open `.env` and add your API key and a secret key:
-     ```env
-     OPENWEATHER_API_KEY=your_actual_api_key_here
-     SECRET_KEY=your_random_secret_string
-     ```
-
-## 📂 Folder Structure
-```
-weathernow/
-│
-├── app.py                  # Main Flask application entry point
-├── config.py               # Configuration settings
-├── database.py             # SQLAlchemy db initialization
-├── models.py               # Database models (SearchHistory, FavoriteCities)
-├── weather_service.py      # OpenWeatherMap API integration service
-├── requirements.txt        # Python dependencies
-├── .env.example            # Example environment variables
-├── README.md               # Project documentation
-│
-├── static/                 # Static assets
-│   ├── css/
-│   │   └── style.css       # Custom Glassmorphism styles
-│   └── js/
-│       └── script.js       # Frontend interactions (Dark mode, validation)
-│
-└── templates/              # HTML Templates (Jinja2)
-    ├── base.html           # Main layout wrapper
-    ├── index.html          # Home page
-    ├── weather.html        # Current weather dashboard
-    ├── forecast.html       # 5-day forecast include
-    ├── history.html        # Recent searches page
-    ├── favorites.html      # Favorite cities page
-    ├── about.html          # About page
-    ├── error.html          # Generic 500 error page
-    └── 404.html            # Not Found page
-```
-
-## 🧪 Testing Instructions
-1. **Run the Application Locally**
-   ```bash
-   python app.py
-   ```
-2. **Access the App**
-   Open your browser and navigate to `http://127.0.0.1:5000`
-3. **Manual Testing Checklist:**
-   - [ ] Search for a valid city (e.g., London) and verify data loads.
-   - [ ] Search for an invalid city and verify the error message appears.
-   - [ ] Add a city to favorites and check the Favorites page.
-   - [ ] Check the History page to ensure the search was logged.
-   - [ ] Toggle dark mode and ensure styles apply correctly.
-
-## 👨‍💻 Author Information
-**Developed for Synent Technologies Internship Task 6**
-- **Developer:** Krushil Lukhi 
-- **GitHub:** [Your GitHub Profile]
-- **LinkedIn:** [Your LinkedIn Profile]
+It provides real-time weather analytics, 5-day forecasts, a user search history, a personalized favorite cities dashboard, and an interactive glassmorphic UI/UX.
 
 ---
-*This project is built as a portfolio piece and showcase for modern full-stack Python development.*
+
+# 🚀 Features
+
+## 🌦️ Weather Analytics & Forecasts
+- **Real-Time Data:** View current temperature, feels-like temperature, humidity, wind speed, atmospheric pressure, visibility, and cloud cover.
+- **5-Day Outlook:** Get daily temperature highs, lows, and general weather conditions grouped cleanly by day.
+- **Dynamic Icons:** Renders visual weather state illustrations based on API conditions.
+
+## 💾 User Session & History Management
+- **Search History:** Automatically log and display the last 10 search queries with precise timestamps.
+- **History Control:** Clear search history with a single click.
+- **Favorite Cities:** Save/remove locations to a personal favorites list for instant access.
+
+## 🎨 Premium UI/UX Design
+- **Glassmorphism:** Elegant, semi-transparent panels with modern CSS drop-shadows.
+- **Dark Mode Support:** Smooth, eye-friendly theme toggle.
+- **Responsive Layout:** Optimized for mobile, tablet, and desktop viewports.
+- **Micro-animations:** Hover transitions and interactive elements for a premium feel.
+
+## 🛡️ Robust Security & Error Handling
+- **Graceful Failures:** Dedicated, styled `404` and `500` error pages.
+- **API Resilience:** Handles empty API keys, invalid city names, network timeouts, and rate-limiting exceptions without crashing.
+- **Cryptographic Security:** Session-based flash notifications secured using a customizable `SECRET_KEY`.
+
+---
+
+# 🛠️ Technology Stack
+
+| Category | Technology | Description |
+|---|---|---|
+| **Backend** | Python 3.11+, Flask | Routing, Jinja2 template rendering, controller logic |
+| **Database** | SQLite, Flask-SQLAlchemy | Local persistence for search history and favorite cities |
+| **API Integration** | OpenWeatherMap API, Requests | External HTTP client fetching real-time weather and forecast data |
+| **Frontend** | HTML5, CSS3, JavaScript (Vanilla) | Custom styling, local interactivity, dark-mode toggle |
+| **Styling Framework**| Bootstrap 5 | Layout scaffolding and responsive grid structure |
+| **Deployment** | Gunicorn | Production-ready WSGI server configuration |
+
+---
+
+# 📂 Project Structure
+
+```text
+Weather App/
+│
+├── app.py                  # Main Flask application & routes controller
+├── config.py               # Application configurations (Database, API Keys, Secrets)
+├── database.py             # SQLAlchemy instance initialization
+├── models.py               # SQLite database schemas (SearchHistory, FavoriteCities)
+├── weather_service.py      # HTTP client service wrapper for OpenWeatherMap API
+├── requirements.txt        # Python dependency manifest
+├── .env.example            # Reference environment variables template
+├── README.md               # Detailed system documentation
+│
+├── static/                 # Frontend assets
+│   ├── css/
+│   │   └── style.css       # Custom CSS styling (Glassmorphism design tokens)
+│   └── js/
+│       └── script.js       # Dark mode logic and input validation
+│
+└── templates/              # Jinja2 HTML templates
+    ├── base.html           # Universal structure, navbar, and flash messages
+    ├── index.html          # Landing page with central search bar
+    ├── weather.html        # Main weather dashboard and forecast card views
+    ├── history.html        # Table of recent searches
+    ├── favorites.html      # Saved cities grid layout
+    ├── about.html          # Project information and technical stack overview
+    ├── error.html          # Generic 500 error display
+    └── 404.html            # Not Found error display
+```
+
+---
+
+# ⚙️ Installation & Setup
+
+## 1. Clone the Repository
+```bash
+git clone <repository-url>
+cd "Weather App"
+```
+
+## 2. Configure Virtual Environment
+
+**Windows:**
+```cmd
+python -m venv venv
+venv\Scripts\activate
+```
+
+**macOS / Linux:**
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+## 3. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+# 🔑 Configuration Guide & API Setup
+
+## 1. Obtain an OpenWeatherMap API Key
+- Register a free account at [OpenWeatherMap API](https://openweathermap.org/api).
+- Navigate to your dashboard and generate an **API Key** (AppID).
+
+## 2. Define Environment Variables
+Create a local `.env` configuration file from the provided template:
+```bash
+cp .env.example .env
+```
+Open `.env` and fill in your keys:
+```env
+OPENWEATHER_API_KEY=your_actual_api_key_here
+SECRET_KEY=generate_a_random_secret_string
+DATABASE_URI=sqlite:///weather.db
+```
+
+---
+
+# 🏗️ Application Architecture
+
+### 🔄 Request Flow & Navigation Map
+```mermaid
+graph TD
+    Home([Home Page /]) -->|Search Form POST| SearchRoute[/search]
+    SearchRoute -->|Redirect| WeatherPage[/weather/:city]
+    
+    WeatherPage -->|Add Favorite POST| AddFav[/favorites/add/:city]
+    WeatherPage -->|Remove Favorite POST| RemFav[/favorites/remove/:city]
+    AddFav -->|Redirect| WeatherPage
+    RemFav -->|Redirect| WeatherPage
+    
+    Nav[Navigation Bar] -->|Click| Home
+    Nav -->|Click| HistoryPage[/history]
+    Nav -->|Click| FavoritesPage[/favorites]
+    Nav -->|Click| AboutPage[/about]
+    
+    HistoryPage -->|Clear History POST| ClearHist[/history/clear]
+    ClearHist -->|Redirect| HistoryPage
+    
+    FavoritesPage -->|Click City| WeatherPage
+    FavoritesPage -->|Remove Favorite POST| RemFav
+```
+
+### 🛰️ API Integration & Database Logging Flow
+```mermaid
+sequenceDiagram
+    actor User
+    participant Router as app.py (weather route)
+    participant DB as SQLite (SearchHistory)
+    participant WS as weather_service.py (WeatherService)
+    participant API as OpenWeatherMap API
+
+    User->>Router: GET /weather/<city>
+    Router->>DB: Add SearchHistory entry (city)
+    DB-->>Router: Confirm write
+    Router->>Router: Check if city is in FavoriteCities
+    Router->>WS: get_current_weather(city)
+    WS->>API: GET weather data (metric units)
+    API-->>WS: Return JSON weather data
+    WS-->>Router: Return processed/error dictionary
+    Router->>WS: get_forecast(city)
+    WS->>API: GET 5-day forecast
+    API-->>WS: Return JSON forecast data
+    WS-->>Router: Return forecast dictionary
+    Router->>Router: Filter forecast (1 item per day)
+    Router-->>User: Render weather.html with context
+```
+
+### 🗄️ Database Schemas
+```mermaid
+classDiagram
+    class SearchHistory {
+        +Integer id (PK)
+        +String city_name
+        +DateTime searched_at
+    }
+    class FavoriteCities {
+        +Integer id (PK)
+        +String city_name (Unique)
+        +DateTime created_at
+    }
+```
+
+---
+
+# 🧪 Testing Instructions
+
+## 1. Run the Flask Server
+```bash
+python app.py
+```
+By default, the application runs on **[http://127.0.0.1:5000](http://127.0.0.1:5000)**. 
+*(If port 5000 is occupied, you can launch on a different port using `flask run --port 8000 --debug`)*
+
+## 2. Quality Assurance Checklist
+- [ ] **API Verification:** Search for a valid city (e.g., `New York`) and confirm data, temperature, and 5-day forecast load successfully.
+- [ ] **Error Resilience:** Input an invalid city name (e.g., `InvalidCityName123`) and verify that a styled flash error is outputted gracefully without application exceptions.
+- [ ] **Persistence:** Add the city to favorites, navigate to the `/favorites` route, and verify it is persistent.
+- [ ] **Search Log:** Navigate to `/history` and verify that recent search queries show up chronologically with accurate timestamps.
+- [ ] **Interactive Styling:** Click the dark mode toggle switch and ensure CSS glassmorphic variables re-render correctly.
+
+---
+
+# 🚀 Future Enhancements
+
+- **Client-Side Geolocation:** Request browser permission to automatically load the user's local weather upon landing.
+- **Interactive Weather Maps:** Embed Leaflet.js or OpenWeatherMap layers to display wind, temperature, and precipitation maps.
+- **Metric/Imperial Toggle:** Allow users to toggle between Celsius (°C) and Fahrenheit (°F) dynamically.
+- **Weather Alerts:** Push notification integrations for extreme weather warnings based on selected favorite cities.
+- **Dockerization:** Add a `Dockerfile` and `docker-compose.yml` for unified development and production builds.
+
+---
+
+# 🤝 Contribution
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+---
+
+# 👨•💻 Author
+
+**Krushil Lukhi**
+*Python Developer | Flask Developer | Full-Stack Engineer*
