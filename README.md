@@ -128,68 +128,61 @@ DATABASE_URI=sqlite:///weather.db
 
 # 🏗️ Application Architecture
 
-### 🔄 Request Flow & Navigation Map
+## 🔄 Request Flow & Navigation Map
+
 ```mermaid
 graph TD
-    Home([Home Page /]) -->|Search Form POST| SearchRoute[/search]
-    SearchRoute -->|Redirect| WeatherPage[/weather/:city]
+    Home["🏠 Home Page<br/>GET /"]
+    Weather["🌦️ Weather Page<br/>GET/POST /weather"]
+    History["📋 History Page<br/>GET /history"]
+    Favorites["⭐ Favorites Page<br/>GET /favorites"]
+    About["ℹ️ About Page<br/>GET /about"]
     
-    WeatherPage -->|Add Favorite POST| AddFav[/favorites/add/:city]
-    WeatherPage -->|Remove Favorite POST| RemFav[/favorites/remove/:city]
-    AddFav -->|Redirect| WeatherPage
-    RemFav -->|Redirect| WeatherPage
+    Home -->|Search City| Weather
+    Weather -->|Add to Favorites| Favorites
+    Weather -->|View History| History
     
-    Nav[Navigation Bar] -->|Click| Home
-    Nav -->|Click| HistoryPage[/history]
-    Nav -->|Click| FavoritesPage[/favorites]
-    Nav -->|Click| AboutPage[/about]
+    History -->|Clear History| History
+    Favorites -->|Click City| Weather
+    Favorites -->|Remove City| Favorites
     
-    HistoryPage -->|Clear History POST| ClearHist[/history/clear]
-    ClearHist -->|Redirect| HistoryPage
-    
-    FavoritesPage -->|Click City| WeatherPage
-    FavoritesPage -->|Remove Favorite POST| RemFav
+    Home -->|Navigation| History
+    Home -->|Navigation| Favorites
+    Home -->|Navigation| About
 ```
 
-### 🛰️ API Integration & Database Logging Flow
-```mermaid
-sequenceDiagram
-    actor User
-    participant Router as app.py (weather route)
-    participant DB as SQLite (SearchHistory)
-    participant WS as weather_service.py (WeatherService)
-    participant API as OpenWeatherMap API
+---
 
-    User->>Router: GET /weather/<city>
-    Router->>DB: Add SearchHistory entry (city)
-    DB-->>Router: Confirm write
-    Router->>Router: Check if city is in FavoriteCities
-    Router->>WS: get_current_weather(city)
-    WS->>API: GET weather data (metric units)
-    API-->>WS: Return JSON weather data
-    WS-->>Router: Return processed/error dictionary
-    Router->>WS: get_forecast(city)
-    WS->>API: GET 5-day forecast
-    API-->>WS: Return JSON forecast data
-    WS-->>Router: Return forecast dictionary
-    Router->>Router: Filter forecast (1 item per day)
-    Router-->>User: Render weather.html with context
-```
+## 🛰️ API Integration & Database Flow
 
-### 🗄️ Database Schemas
-```mermaid
-classDiagram
-    class SearchHistory {
-        +Integer id (PK)
-        +String city_name
-        +DateTime searched_at
-    }
-    class FavoriteCities {
-        +Integer id (PK)
-        +String city_name (Unique)
-        +DateTime created_at
-    }
-```
+**Request Sequence:**
+1. User searches for a city on the weather page
+2. Flask route captures the city name from POST request
+3. City is logged to SearchHistory table in SQLite database
+4. WeatherService class makes HTTP GET request to OpenWeatherMap API
+5. API returns real-time weather data and 5-day forecast
+6. Weather data is processed and rendered in weather.html template
+7. User can add/remove cities from favorites (stored in FavoriteCities table)
+
+**Error Handling Flow:**
+- Invalid city name → Display flash error message
+- API timeout → Return graceful timeout error
+- Rate limit exceeded → Notify user to try again later
+- Missing API key → Alert developer to configure environment
+
+---
+
+## 🗄️ Database Schema
+
+**SearchHistory Table:**
+- `id` (Integer, Primary Key)
+- `city` (String, Required)
+- `searched_at` (DateTime, Auto-timestamp)
+
+**FavoriteCities Table:**
+- `id` (Integer, Primary Key)
+- `city` (String, Unique, Required)
+- `added_at` (DateTime, Auto-timestamp)
 
 ---
 
@@ -208,6 +201,8 @@ By default, the application runs on **[http://127.0.0.1:5000](http://127.0.0.1:5
 - [ ] **Persistence:** Add the city to favorites, navigate to the `/favorites` route, and verify it is persistent.
 - [ ] **Search Log:** Navigate to `/history` and verify that recent search queries show up chronologically with accurate timestamps.
 - [ ] **Interactive Styling:** Click the dark mode toggle switch and ensure CSS glassmorphic variables re-render correctly.
+- [ ] **Responsive Design:** Test on mobile, tablet, and desktop viewports to ensure proper layout.
+- [ ] **Error Pages:** Manually trigger 404 and 500 errors to verify styled error pages display.
 
 ---
 
@@ -218,6 +213,8 @@ By default, the application runs on **[http://127.0.0.1:5000](http://127.0.0.1:5
 - **Metric/Imperial Toggle:** Allow users to toggle between Celsius (°C) and Fahrenheit (°F) dynamically.
 - **Weather Alerts:** Push notification integrations for extreme weather warnings based on selected favorite cities.
 - **Dockerization:** Add a `Dockerfile` and `docker-compose.yml` for unified development and production builds.
+- **Unit Tests:** Add pytest test suite for backend route and service testing.
+- **API Caching:** Implement Redis caching to reduce API calls and improve performance.
 
 ---
 
@@ -231,7 +228,14 @@ By default, the application runs on **[http://127.0.0.1:5000](http://127.0.0.1:5
 
 ---
 
-# 👨•💻 Author
+# 👨‍💻 Author
 
-**Krushil Lukhi**
+**Krushil Lukhi**  
 *Python Developer | Flask Developer | Full-Stack Engineer*
+
+**LinkedIn:** [Your LinkedIn Profile]  
+**GitHub:** [Your GitHub Profile]
+
+---
+
+*This project is built as a portfolio piece and showcase for modern full-stack Python development with Flask and OpenWeatherMap API integration.*
