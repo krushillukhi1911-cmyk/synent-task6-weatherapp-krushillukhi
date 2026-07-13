@@ -232,10 +232,6 @@ By default, the application runs on **[http://127.0.0.1:5000](http://127.0.0.1:5
 
 **Krushil Lukhi**  
 *Python Developer | Flask Developer | Full-Stack Engineer*
-
-**LinkedIn:** [Your LinkedIn Profile]  
-**GitHub:** [Your GitHub Profile]
-
 ---
 
 *This project is built as a portfolio piece and showcase for modern full-stack Python development with Flask and OpenWeatherMap API integration.*
